@@ -58,7 +58,7 @@
                       <a href="index.php?page=editobat&id_obat=<?php echo $data['id_obat']; ?>"
                           class="btn btn-success"><i class="fa fa-edit"></i> </a>
                       <a href="index.php?page=hapusobat&id_obat=<?php echo $data['id_obat']; ?>"
-                       class="btn btn-danger"><i class="fa fa-trash"></i> </a>
+                       class="btn btn-danger delete-link"><i class="fa fa-trash"></i> </a>
                     </td>
                   </tr>
                   <?php }?>
@@ -78,3 +78,6 @@
           </div>
         </div>
       </div>
+
+
+      <?php include 'asset/validasi_hapus.php' ?>

@@ -28,6 +28,8 @@ include 'koneksi.php';
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script src="dist/jquery/jquerycekbarang.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -135,9 +137,10 @@ include 'koneksi.php';
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
-
-  <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery 3 -->
+  <script src="dist/jquery/dist/jquery.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="dist/jquery-ui/jquery-ui.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- DataTables -->

@@ -62,8 +62,7 @@
                     <td><?php echo $data['tgl_masuk'] ?></td>
                     <td><?php echo $data['tgl_kadaluarsa'] ?></td>
                     <td>
-                      <a href="index.php?page=editstok&id_stok=<?php echo $data['id_stok']; ?>"
-                          class="btn btn-success btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                      <a href="index.php?page=editstok&id_stok=<?php echo $data['id_stok']; ?>" class="btn btn-success btn-sm delete-link"><i class="fa fa-edit"></i> Edit</a>
                     </td>
                   </tr>
                   <?php }?>
@@ -86,3 +85,5 @@
           </div>
         </div>
       </div>
+
+      <?php include 'asset/validasi_hapus.php' ?>

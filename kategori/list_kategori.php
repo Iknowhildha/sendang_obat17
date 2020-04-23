@@ -55,7 +55,7 @@
                       <a href="index.php?page=editkategori&id_kategori=<?php echo $data['id_kategori']; ?>"
                         class="btn btn-success btn-sm"><i class="fa fa-edit"></i> Edit</a>
                       <a href="index.php?page=hapuskategori&id_kategori=<?php echo $data['id_kategori']; ?>"
-                        class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</a>
+                        class="btn btn-danger btn-sm delete-link"><i class="fa fa-trash"></i> Hapus</a>
                     </td>
                   </tr>
                   <?php }?>
@@ -73,3 +73,5 @@
           </div>
         </div>
       </div>
+
+<?php include 'asset/validasi_hapus.php' ?>

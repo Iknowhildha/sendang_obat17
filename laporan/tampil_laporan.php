@@ -1,8 +1,8 @@
-<div class="box box-info">
-      <div class="box-header with-border">
-        <h3 class="box-title">Hasil Filter</h3>
+<div class="card card-info">
+      <div class="card-header with-border">
+        <h3 class="card-title"><i class="fa fa-eye"></i> Hasil Filter</h3>
       </div>
-<div class="box-body">
+<div class="card-body">
 <?php
     if(isset($_POST['filter']) && ! empty($_POST['filter'])){ // Cek apakah user telah memilih filter dan klik tombol tampilkan
         $filter = $_POST['filter']; // Ambil data filder yang dipilih user
@@ -11,51 +11,51 @@
             $tgl = date('d-m-y', strtotime($_POST['tanggal']));
 
             echo '<b>Data Transaksi Tanggal '.$tgl.'</b><br /><br />';
-            echo '<a class="btn btn-danger" href="halaman_laporan/print.php?filter=1&tanggal='.$_POST['tanggal'].'"><i class="fa fa-print"></i> Cetak PDF</a>';
+            echo '<a class="btn btn-danger" style="margin-right: 10px;"  href="laporan/print.php?filter=1&tanggal='.$_POST['tanggal'].'"><i class="fa fa-print"></i> Cetak PDF</a>';
             echo '<a class="btn btn-warning pull-right" href="index.php?page=laporan"><i class="fa fa-refresh"></i> Reset Filter</a></br></br>';
 
-            $query = "SELECT transaksi.tgl_transaksi, transaksi.total_bayar, detail_transaksi.id_obat, obat.nama_obat, detail_transaksi.harga, detail_transaksi.qty, detail_transaksi.total
+            $query = "SELECT transaksi.tgl_transaksi, detail_transaksi.id_obat, obat.nama_obat, detail_transaksi.harga, detail_transaksi.qty, detail_transaksi.total
             FROM detail_transaksi
             JOIN transaksi ON detail_transaksi.id_transaksi = transaksi.id_transaksi
-            JOIN barang ON detail_transaksi.id_obat = obat.id_obat WHERE DATE(tgl_transaksi)='".$_POST['tanggal']."'"; // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
+            JOIN obat ON detail_transaksi.id_obat = obat.id_obat WHERE DATE(tgl_transaksi)='".$_POST['tanggal']."'"; // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
         }else if($filter == '2'){ // Jika filter nya 2 (per bulan)
             $nama_bulan = array('', 'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
 
             echo '<b>Data Transaksi Bulan '.$nama_bulan[$_POST['bulan']].' '.$_POST['tahun'].'</b><br /><br />';
-            echo '<a class="btn btn-danger" href="halaman_laporan/print.php?filter=2&bulan='.$_POST['bulan'].'&tahun='.$_POST['tahun'].'"><i class="fa fa-print"></i> Cetak PDF</a>';
+            echo '<a class="btn btn-danger" style="margin-right: 10px;"  href="laporan/print.php?filter=2&bulan='.$_POST['bulan'].'&tahun='.$_POST['tahun'].'"><i class="fa fa-print"></i> Cetak PDF</a>';
             echo '<a class="btn btn-warning pull-right" href="index.php?page=laporan"><i class="fa fa-refresh"></i> Reset Filter</a></br></br>';
 
-            $query = "SELECT transaksi.tgl_transaksi, transaksi.total_bayar, detail_transaksi.id_obat, obat.nama_obat, detail_transaksi.harga, detail_transaksi.qty, detail_transaksi.total
+            $query = "SELECT transaksi.tgl_transaksi, detail_transaksi.id_obat, obat.nama_obat, detail_transaksi.harga, detail_transaksi.qty, detail_transaksi.total
             FROM detail_transaksi
             JOIN transaksi ON detail_transaksi.id_transaksi = transaksi.id_transaksi
-            JOIN barang ON detail_transaksi.id_obat = obat.id_obat WHERE MONTH(tgl_transaksi)='".$_POST['bulan']."' AND YEAR(tgl_transaksi)='".$_POST['tahun']."'"; // Tampilkan data transaksi sesuai bulan dan tahun yang diinput oleh user pada filter
+            JOIN obat ON detail_transaksi.id_obat = obat.id_obat WHERE MONTH(tgl_transaksi)='".$_POST['bulan']."' AND YEAR(tgl_transaksi)='".$_POST['tahun']."'"; // Tampilkan data transaksi sesuai bulan dan tahun yang diinput oleh user pada filter
         }else if($filter == '3'){ // Jika filter nya 3 (per tahun)
             echo '<b>Data Transaksi Tahun '.$_POST['tahun'].'</b><br /><br />';
-            echo '<a class="btn btn-danger" href="halaman_laporan/print.php?filter=3&tahun='.$_POST['tahun'].'"><i class="fa fa-print"></i> Cetak PDF</a>';
+            echo '<a class="btn btn-danger" style="margin-right: 10px;" href="laporan/print.php?filter=3&tahun='.$_POST['tahun'].'"><i class="fa fa-print"></i> Cetak PDF</a>';
             echo '<a class="btn btn-warning pull-right" href="index.php?page=laporan"><i class="fa fa-refresh"></i> Reset Filter</a></br></br>';
 
-            $query = "SELECT transaksi.tgl_transaksi, transaksi.total_bayar, detail_transaksi.id_obat, obat.nama_obat, detail_transaksi.harga, detail_transaksi.qty, detail_transaksi.total
+            $query = "SELECT transaksi.tgl_transaksi, detail_transaksi.id_obat, obat.nama_obat, detail_transaksi.harga, detail_transaksi.qty, detail_transaksi.total
             FROM detail_transaksi
             JOIN transaksi ON detail_transaksi.id_transaksi = transaksi.id_transaksi
-            JOIN barang ON detail_transaksi.id_obat = obat.id_obat WHERE YEAR(tgl_transaksi)='".$_POST['tahun']."'"; // Tampilkan data transaksi sesuai tahun yang diinput oleh user pada filter
+            JOIN obat ON detail_transaksi.id_obat = obat.id_obat WHERE YEAR(tgl_transaksi)='".$_POST['tahun']."'"; // Tampilkan data transaksi sesuai tahun yang diinput oleh user pada filter
         }else{
             $tgl_awal = date('d-m-y', strtotime($_POST['tawal']));
             $tgl_akhir = date('d-m-y', strtotime($_POST['takhir']));
             echo '<b>Data Transaksi Tanggal '.$tgl_awal.' Sampai '.$tgl_akhir.'</b><br /><br />';
-            echo '<a class="btn btn-danger" href="halaman_laporan/print.php?filter=4&tawal='.$_POST['tawal'].'&takhir='.$_POST['takhir'].'"><i class="fa fa-print"></i> Cetak PDF</a>';
+            echo '<a class="btn btn-danger" style="margin-right: 10px;"  href="laporan/print.php?filter=4&tawal='.$_POST['tawal'].'&takhir='.$_POST['takhir'].'"><i class="fa fa-print"></i> Cetak PDF</a>';
             echo '<a class="btn btn-warning pull-right" href="index.php?page=laporan"><i class="fa fa-refresh"></i> Reset Filter</a></br></br>';
-            $query = "SELECT transaksi.tgl_transaksi, transaksi.total_bayar, detail_transaksi.id_obat, obat.nama_obat, detail_transaksi.harga, detail_transaksi.qty, detail_transaksi.total
+            $query = "SELECT transaksi.tgl_transaksi, detail_transaksi.id_obat, obat.nama_obat, detail_transaksi.harga, detail_transaksi.qty, detail_transaksi.total
             FROM detail_transaksi
             JOIN transaksi ON detail_transaksi.id_transaksi = transaksi.id_transaksi
-            JOIN barang ON detail_transaksi.id_obat = obat.id_obat WHERE DATE(tgl_transaksi) BETWEEN '".$_POST['tawal']."' AND '".$_POST['takhir']."'";
+            JOIN obat ON detail_transaksi.id_obat = obat.id_obat WHERE DATE(tgl_transaksi) BETWEEN '".$_POST['tawal']."' AND '".$_POST['takhir']."'";
         }
     }else{ // Jika user tidak mengklik tombol tampilkan
         echo '<b>Semua Data Transaksi</b><br /><br />';
-        echo '<a class="btn btn-danger" href="halaman_laporan/print.php"><i class="fa fa-print"></i> Cetak PDF</a><br /><br />';
-        $query = "SELECT transaksi.tgl_transaksi, transaksi.total_bayar, detail_transaksi.id_obat, obat.nama_obat, detail_transaksi.harga, detail_transaksi.qty, detail_transaksi.total
+        echo '<a class="btn btn-danger" href="laporan/print.php"><i class="fa fa-print"></i> Cetak PDF</a><br /><br />';
+        $query = "SELECT transaksi.tgl_transaksi, detail_transaksi.id_obat, obat.nama_obat, detail_transaksi.harga, detail_transaksi.qty, detail_transaksi.total
         FROM detail_transaksi
         JOIN transaksi ON detail_transaksi.id_transaksi = transaksi.id_transaksi
-        JOIN barang ON detail_transaksi.id_obat = obat.id_obat"; // Tampilkan semua data transaksi diurutkan berdasarkan tanggal
+        JOIN obat ON detail_transaksi.id_obat = obat.id_obat"; // Tampilkan semua data transaksi diurutkan berdasarkan tanggal
     }
     ?>
 
@@ -86,7 +86,7 @@
             echo "<td>".$data['nama_obat']."</td>";
             echo "<td>Rp. ".number_format($data['harga'])."</td>";
             echo "<td>".$data['qty']."</td>";
-            echo "<td class='bg-primary'>Rp.".number_format($data['total_bayar'])."</td>";
+            echo "<td class='bg-primary'>Rp.".number_format($data['total'])."</td>";
             echo "</tr>";
         }
     }else{ // Jika data tidak ada
