@@ -78,7 +78,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="profit">Profit</label>
-                                        <input type="number" class="form-control" id="profit" name="profit" placeholder="Rp."
+                                        <input type="number" class="form-control" id="profit" name="profit" placeholder="Rp." >
                                             >
                                     </div>
                                 </div>

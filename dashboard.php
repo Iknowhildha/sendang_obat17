@@ -15,20 +15,76 @@
         </div><!-- /.container-fluid -->
       </section>
 
+      <?php
+  ini_set('date.timezone', 'Asia/Jakarta');
+  include 'asset/bulan_indo.php';
+  $grafikbulan = date('Y-m-d');
+  $date = date('Y-m-d');
+  $query = mysqli_query($koneksi, "SELECT * FROM transaksi WHERE tgl_transaksi='$date'");
+  $jumlah_transaksi = mysqli_num_rows($query);
+  $query2 = mysqli_query($koneksi, "SELECT SUM(stok_sekarang) as obatsekarang FROM stok");
+  while ($data = mysqli_fetch_array($query2)) {
+    $jumlah_barang = $data['obatsekarang'];
+  }
+
+  //NOTE : SUM DIGUNAKAN UNTUK MENJUMLAH DATA PADA KOLOM
+
+  //menjulam data yang ada di tabel stok
+  $query3 = mysqli_query($koneksi, "SELECT * FROM stok WHERE tgl_masuk='$date'");
+  $barang_masuk = mysqli_num_rows($query3);
+
+  $query4 = mysqli_query($koneksi, "SELECT SUM(total_bayar) AS totaltransaksi FROM transaksi where tgl_transaksi='$date'");
+  while ($data = mysqli_fetch_array($query4)) {
+      $totaltransaksi = $data['totaltransaksi'];
+  }
+
+  ?>
+ 
 <div class="row">
 
     <div class="col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>Rp. 10.000.000</h3>
-
+            <h3>Rp. <?php echo number_format($totaltransaksi) ?></h3>
                 <p>Pendapatan Hari Ini</p>
             </div>
             <div class="icon">
                 <i class="ion ion-cash"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            
+        </div>
+    </div>
+
+
+
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+            <h3><?php echo $jumlah_transaksi ?></h3>
+                <p>Jumlah Transaksi Hari Ini</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            
+        </div>
+    </div>
+
+
+
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+            <h3><?php echo $jumlah_barang ?></h3>
+        <p>Jumlah Obat Saat Ini</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            
         </div>
     </div>
 
@@ -36,45 +92,16 @@
         <!-- small box -->
         <div class="small-box bg-success">
             <div class="inner">
-                <h3>150</h3>
-
-                <p>Barang Masuk Hari ini</p>
+            <h3><?php echo $barang_masuk ?></h3>
+        <p>Obat Masuk Hari Ini</p>
             </div>
             <div class="icon">
                 <i class="ion ion-bag"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            
         </div>
     </div>
 
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-warning">
-            <div class="inner">
-                <h3>150</h3>
-
-                <p>New Orders</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3>150</h3>
-
-                <p>New Orders</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
+    
 
 </div>
