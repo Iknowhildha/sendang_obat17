@@ -149,4 +149,22 @@ $('.inputanangka').on('keypress', function (e) {
             //alert('disini');
             var inp = $(this).val().replace(/\./g, '');
             $(this).val(formatRibuan(inp));
+
+        });
+
+        function intVal(i) {
+    return typeof i === 'string' ?
+    i.replace(/[\$,.]/g, '') * 1 :
+        typeof i === 'number' ?
+            i : 0;
+};
+
+        $(document).ready(function () {
+        $("#harga_beli,#harga_jual").keyup(function () {
+            var bl = intVal($("#harga_beli").val());
+            var jl = intVal($("#harga_jual").val());
+            var total = jl - bl;
+            $("#profit").val(formatRibuan(total));
+        });
+    });
 </script>
