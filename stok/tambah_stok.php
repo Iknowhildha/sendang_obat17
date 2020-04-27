@@ -1,4 +1,4 @@
-      <!-- Content Header (Page header) -->
+     <!-- Content Header (Page header) -->
       <section class="content-header">
           <div class="container-fluid">
               <div class="row mb-2">
@@ -66,20 +66,21 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="harga_beli">Harga Beli</label>
-                                        <input type="number" class="form-control" id="harga_beli" name="harga_beli" placeholder="Rp.">
+                                        <input type="text" class="form-control inputanangka" id="harga_beli" name="harga_beli" placeholder="Rp.">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="harga_jual">Harga Jual</label>
-                                        <input type="number" class="form-control" id="harga_jual" name="harga_jual" placeholder="Rp.">
+                                        <input type="text" class="form-control inputanangka" id="harga_jual" name="harga_jual" placeholder="Rp.">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="profit">Profit</label>
-                                        <input type="number" class="form-control" id="profit" name="profit" placeholder="Rp." >
-                                            >
+                                        <input type="text" readonly class="form-control inputanangka" id="profit" name="profit" placeholder="Rp." 
+                                        >
+                                            
                                     </div>
                                 </div>
                             </div>
@@ -123,3 +124,29 @@
         <!-- /.card -->
     </div>
 </div>
+
+<script>
+// memformat angka ribuan
+function formatRibuan(angka) {
+    if (typeof(angka) != 'string') angka = angka.toString();
+    var reg = new RegExp('([0-9]+)([0-9]{3})');
+    while(reg.test(angka)) angka = angka.replace(reg, '$1.$2');
+    return angka;
+}
+$('.inputanangka').on('keypress', function (e) {
+            var c = e.keyCode || e.charCode;
+            switch (c) {
+                case 8:
+                case 9:
+                case 27:
+                case 13:
+                    return;
+                case 65:
+                    if (e.ctrlKey === true) return;
+            }
+            if (c < 48 || c > 57) e.preventDefault();
+        }).on('keyup', function () {
+            //alert('disini');
+            var inp = $(this).val().replace(/\./g, '');
+            $(this).val(formatRibuan(inp));
+</script>
