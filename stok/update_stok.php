@@ -4,9 +4,9 @@
         $stok_masuk     = mysqli_real_escape_string($koneksi,$_POST ['stok_masuk']);
         $stok_sekarang  = mysqli_real_escape_string($koneksi,$_POST ['stok_sekarang']);
         $satuan         = mysqli_real_escape_string($koneksi,$_POST ['satuan']);
-        $harga_beli     = mysqli_real_escape_string($koneksi,$_POST ['harga_beli']);
-        $harga_jual     = mysqli_real_escape_string($koneksi,$_POST ['harga_jual']);
-        $profit         = mysqli_real_escape_string($koneksi,$_POST ['profit']);
+        $harga_beli     = preg_replace('/\D/', '', $_POST['harga_beli']);
+        $harga_jual     = preg_replace('/\D/', '', $_POST['harga_jual']);
+        $profit         = preg_replace('/\D/', '', $_POST['profit']);
         $tgl_masuk      = mysqli_real_escape_string($koneksi,$_POST ['tgl_masuk']);
         $tgl_kadaluarsa = mysqli_real_escape_string($koneksi,$_POST ['tgl_kadaluarsa']);
         $id_obat        = mysqli_real_escape_string($koneksi,$_POST ['id_obat']);

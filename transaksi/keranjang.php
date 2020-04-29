@@ -21,6 +21,7 @@ if(isset($_POST['id_obat'])){
     AND obat.id_obat = '$id_obat' AND stok.id_stok = '$idstok'");
     $pecah = mysqli_fetch_assoc($data);
     
+    
     if(isset($_SESSION['keranjang'])){  
           $item_array_id = array_column($_SESSION['keranjang'], 'id_obat');  
           if(!in_array($id_obat, $item_array_id))  

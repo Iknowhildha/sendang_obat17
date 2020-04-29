@@ -24,7 +24,7 @@ foreach ($_SESSION['keranjang'] as $key => $value) {
     $ambil=$koneksi->query("SELECT * FROM stok WHERE id_stok='$id_stok2'");
     $data=$ambil->fetch_array(MYSQLI_ASSOC);
 
-    if ($data['stok_sekarang'] <= $qty2) {
+    if ($data['stok_sekarang'] < $qty2) {
         echo "<script>swal('Gagal!','Ada Stok Obat Tidak Mencukupi','error');</script>";
         echo "<meta http-equiv='refresh' content='1;url=index.php?page=transaksi'>";
     }else{

@@ -90,22 +90,22 @@ $data=$ambil->fetch_array(MYSQLI_ASSOC);
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="harga_beli">Harga Beli</label>
-                                        <input type="number" class="form-control" id="harga_beli" name="harga_beli"
-                                            value="<?php echo $data['harga_beli'] ?>">
+                                        <input type="text" class="form-control inputanangka" id="harga_beli" name="harga_beli"
+                                            value="<?php echo number_format($data['harga_beli']) ?>">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="harga_jual">Harga Jual</label>
-                                        <input type="number" class="form-control" id="harga_jual" name="harga_jual"
-                                            value="<?php echo $data['harga_jual'] ?>">
+                                        <input type="text" class="form-control inputanangka" id="harga_jual" name="harga_jual"
+                                            value="<?php echo number_format($data['harga_jual']) ?>">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="profit">Profit</label>
-                                        <input type="number" class="form-control" id="profit" name="profit"
-                                            value="<?php echo $data['profit'] ?>">
+                                        <input type="text" readonly class="form-control inputanangka" id="profit" name="profit"
+                                            value="<?php echo number_format($data['profit']) ?>">
                                     </div>
                                 </div>
                             </div>
@@ -151,3 +151,47 @@ $data=$ambil->fetch_array(MYSQLI_ASSOC);
         <!-- /.card -->
     </div>
 </div>
+
+<script>
+// memformat angka ribuan
+function formatRibuan(angka) {
+    if (typeof(angka) != 'string') angka = angka.toString();
+    var reg = new RegExp('([0-9]+)([0-9]{3})');
+    while(reg.test(angka)) angka = angka.replace(reg, '$1.$2');
+    return angka;
+}
+$('.inputanangka').on('keypress', function (e) {
+            var c = e.keyCode || e.charCode;
+            switch (c) {
+                case 8:
+                case 9:
+                case 27:
+                case 13:
+                    return;
+                case 65:
+                    if (e.ctrlKey === true) return;
+            }
+            if (c < 48 || c > 57) e.preventDefault();
+        }).on('keyup', function () {
+            //alert('disini');
+            var inp = $(this).val().replace(/\./g, '');
+            $(this).val(formatRibuan(inp));
+
+        });
+
+        function intVal(i) {
+    return typeof i === 'string' ?
+    i.replace(/[\$,.]/g, '') * 1 :
+        typeof i === 'number' ?
+            i : 0;
+};
+
+        $(document).ready(function () {
+        $("#harga_beli,#harga_jual").keyup(function () {
+            var bl = intVal($("#harga_beli").val());
+            var jl = intVal($("#harga_jual").val());
+            var total = jl - bl;
+            $("#profit").val(formatRibuan(total));
+        });
+    });
+</script>

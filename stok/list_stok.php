@@ -52,7 +52,8 @@
               stok.harga_jual, stok.tgl_masuk, stok.tgl_kadaluarsa, stok.id_obat
               FROM obat, stok
               WHERE obat.id_obat = stok.id_obat
-              AND stok.stok_sekarang <='5'");
+              AND stok.stok_sekarang <='5'
+              AND stok.stok_sekarang >'0'");
               $no = $query->num_rows;
               if($no>0){
                 echo "<script>swal('Ada $no Barang Stoknya Menipis', '', 'info');</script>";
