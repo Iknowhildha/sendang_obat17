@@ -19,8 +19,82 @@
       <div class="row">
         <div class="col-md-6">
           <a href="index.php?page=tambahstok" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Stok</a>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#modal-lg" ><i class="fa fa-eye"></i> Stok Menipis</button>
         </div>
       </div>
+
+      <div class="modal fade" id="modal-lg">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Daftar Stok Obat Menipis</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            <table id="example4" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Id Obat</th>
+                    <th>Id Stok</th>
+                    <th>Nama Obat</th>
+                    <th>Stok</th>
+                    <th>Satuan</th>
+                    <th>Harga</th>
+                    <th>Tanggal Masuk</th>
+                    <th>Tanggal Kadaluarsa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php 
+              $query = mysqli_query($koneksi, "SELECT stok.id_stok, obat.nama_obat, stok.stok_sekarang, stok.satuan,
+              stok.harga_jual, stok.tgl_masuk, stok.tgl_kadaluarsa, stok.id_obat
+              FROM obat, stok
+              WHERE obat.id_obat = stok.id_obat
+              AND stok.stok_sekarang <='5'");
+              $no = $query->num_rows;
+              if($no>0){
+                echo "<script>swal('Ada $no Barang Stoknya Menipis', '', 'info');</script>";
+              } 
+              $jumlah = mysqli_num_rows($query);
+              while ($data = mysqli_fetch_array($query)){
+              ?>
+                  <tr>
+                    <td><?php echo $data['id_obat'] ?></td>
+                    <td><?php echo $data['id_stok'] ?></td>
+                    <td><?php echo $data['nama_obat'] ?></td>
+                    <td><?php echo $data['stok_sekarang'] ?></td>
+                    <td><span class="badge badge-warning"><?php echo $data['satuan'] ?></span></td>
+                    <td>Rp.<?php echo number_format($data['harga_jual']) ?>,-</td>
+                    <td><?php echo $data['tgl_masuk'] ?></td>
+                    <td><?php echo $data['tgl_kadaluarsa'] ?></td>
+                  </tr>
+                  <?php }?>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Id Obat</th>
+                    <th>Id Stok</th>
+                    <th>Nama Obat</th>
+                    <th>Stok</th>
+                    <th>Satuan</th>
+                    <th>Harga</th>
+                    <th>Tanggal Masuk</th>
+                    <th>Tanggal Kadaluarsa</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
 
       <br>
       <div class="row">

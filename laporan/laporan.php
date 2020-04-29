@@ -10,6 +10,9 @@
     $jumlah_barang = $data['obatsekarang'];
   }
 
+  $query5 = mysqli_query($koneksi, "SELECT * FROM stok");
+  $jumlahkeseluruhan = mysqli_num_rows($query5);
+
   //NOTE : SUM DIGUNAKAN UNTUK MENJUMLAH DATA PADA KOLOM
 
   //menjulam data yang ada di tabel stok
@@ -78,8 +81,8 @@
         <!-- small box -->
         <div class="small-box bg-danger">
             <div class="inner">
-            <h3><?php echo $jumlah_barang ?></h3>
-        <p>Jumlah Obat Saat Ini</p>
+            <h3><?php echo $jumlahkeseluruhan ?></h3>
+        <p>Jumlah Keseluruhan</p>
             </div>
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>

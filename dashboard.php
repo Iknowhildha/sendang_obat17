@@ -26,6 +26,14 @@
   while ($data = mysqli_fetch_array($query2)) {
     $jumlah_barang = $data['obatsekarang'];
   }
+  $query6 = mysqli_query($koneksi, "SELECT * FROM user");
+  $user = mysqli_num_rows($query6);
+
+  $query7 = mysqli_query($koneksi, "SELECT * FROM kategori ");
+  $jumlahkategori = mysqli_num_rows($query7);
+  
+  $query5 = mysqli_query($koneksi, "SELECT * FROM stok");
+  $jumlahkeseluruhan = mysqli_num_rows($query5);
 
   //NOTE : SUM DIGUNAKAN UNTUK MENJUMLAH DATA PADA KOLOM
 
@@ -41,7 +49,6 @@
   ?>
  
 <div class="row">
-
     <div class="col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-info">
@@ -78,8 +85,8 @@
         <!-- small box -->
         <div class="small-box bg-danger">
             <div class="inner">
-            <h3><?php echo $jumlah_barang ?></h3>
-        <p>Jumlah Obat Saat Ini</p>
+            <h3><?php echo $jumlahkeseluruhan ?></h3>
+        <p>Jumlah Obat Keseluruhan</p>
             </div>
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -102,6 +109,32 @@
         </div>
     </div>
 
-    
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+            <h3><?php echo number_format($user) ?></h3>
+                <p>User</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-cash"></i>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+            <h3><?php echo $jumlahkategori ?></h3>
+                <p>Jumlah Kategori</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            
+        </div>
+    </div>
 
 </div>

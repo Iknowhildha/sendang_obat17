@@ -159,6 +159,9 @@ include 'koneksi.php';
       $("#example3").DataTable({
         "responsive" : true,
       });
+      $("#example4").DataTable({
+        "responsive" : true,
+      });
       $('#example2').DataTable({
         "paging": true,
         "lengthChange": false,
